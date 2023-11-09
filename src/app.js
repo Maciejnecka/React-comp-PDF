@@ -96,4 +96,20 @@ const root = createRoot(document.querySelector('#root'));
 //   }
 // }
 
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { step } = this.props;
+    this.state = {
+      step,
+      counter: 0,
+      users: [],
+      filters: {
+        name: '',
+      },
+    };
+  }
+}
+
 root.render(<App />);
