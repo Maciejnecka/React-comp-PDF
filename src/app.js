@@ -96,19 +96,45 @@ const root = createRoot(document.querySelector('#root'));
 //   }
 // }
 
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+
+//     const { step } = this.props;
+//     this.state = {
+//       step,
+//       counter: 0,
+//       users: [],
+//       filters: {
+//         name: '',
+//       },
+//     };
+//   }
+// }
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    const { step } = this.props;
     this.state = {
-      step,
-      counter: 0,
-      users: [],
-      filters: {
-        name: '',
-      },
+      searchQuery: '',
+      users: ['Jan Kowalski', 'Michał Nowak'],
     };
+  }
+  render() {
+    const { users } = this.state;
+    const usersJSX = users.map((name) => {
+      return <li>{name}</li>;
+    });
+    return <ul>{usersJSX}</ul>;
+  }
+
+  addUser(name) {
+    this.setState({ users: [...this.state.users, name] });
+  }
+
+  removeUser(name) {
+    const currUsers = this.state.users.filter((user) => user !== name);
+    this.setState({ users: currUsers });
   }
 }
 
