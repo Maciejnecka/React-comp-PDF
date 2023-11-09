@@ -132,8 +132,9 @@ class App extends React.Component {
     return <ul>{usersList}</ul>;
   }
 
-  clickHandler = (event) => {
-    console.log(event.target.innerText);
+  clickHandler = (e) => {
+    const { innerText: userName } = e.target;
+    this.removeUser(userName);
   };
 
   addUser(name) {
@@ -141,7 +142,7 @@ class App extends React.Component {
   }
 
   removeUser(name) {
-    const currUsers = this.state.users.filter((user) => user !== name);
+    const currUsers = this.state.users.filter((user) => user != name);
     this.setState({ users: currUsers });
   }
 }
