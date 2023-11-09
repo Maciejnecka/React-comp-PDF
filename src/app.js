@@ -24,15 +24,38 @@ const root = createRoot(document.querySelector('#root'));
 // }
 
 // Uruchamianie na etapie montowani
+// class App extends React.Component {
+//   render() {
+//     return <h1>Hello World</h1>;
+//   }
+//   componentDidMount() {
+//     this.id = setInterval(() => console.log('co sekunde...'), 1000);
+//   }
+//   // Gdy komponent zostanie zaktualizowany
+//   componentDidUpdate() {
+//     clearInterval(this.id);
+//   }
+// }
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 0,
+    };
+  }
+
   render() {
-    return <h1>Hello World</h1>;
+    return <h1>{this.state.counter}</h1>;
   }
+
   componentDidMount() {
-    this.id = setInterval(() => console.log('co sekunde...'), 1000);
+    this.id = setInterval(() => {
+      const { counter } = this.state;
+      this.setState({ counter: counter + 1 });
+    }, 1000);
   }
-  // Gdy komponent zostanie zaktualizowany
-  componentDidUpdate() {
+  componentWillUnmount() {
     clearInterval(this.id);
   }
 }
