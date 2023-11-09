@@ -112,38 +112,73 @@ const root = createRoot(document.querySelector('#root'));
 //   }
 // }
 
+// class App extends React.Component {
+//   state = {
+//     searchQuery: '',
+//     users: ['Jan Kowalski', 'Michał Nowak'],
+//   };
+//   constructor(props) {
+//     super(props);
+//   }
+//   render() {
+//     const { users } = this.state;
+//     const usersList = users.map((name, index) => {
+//       return (
+//         <li key={index} onClick={this.clickHandler}>
+//           {name}
+//         </li>
+//       );
+//     });
+//     return <ul>{usersList}</ul>;
+//   }
+
+//   clickHandler = (e) => {
+//     const { innerText: userName } = e.target;
+//     this.removeUser(userName);
+//   };
+
+//   addUser(name) {
+//     this.setState({ users: [...this.state.users, name] });
+//   }
+
+//   removeUser(name) {
+//     const currUsers = this.state.users.filter((user) => user != name);
+//     this.setState({ users: currUsers });
+//   }
+// }
+
+// class App extends React.Component {
+//   clickHandler = (e) => this.printEventType(e);
+//   mouseEnterHandler = (e) => this.printEventType(e);
+//   printEventType(e) {
+//     console.log(e.type);
+//   }
+//   render() {
+//     return (
+//       <div onClick={this.clickHandler} onMouseEnter={this.mouseEnterHandler}>
+//         Events!
+//       </div>
+//     );
+//   }
+// }
+
 class App extends React.Component {
-  state = {
-    searchQuery: '',
-    users: ['Jan Kowalski', 'Michał Nowak'],
+  divClickHandler = (e) => {
+    console.log(e.currentTarget.tagName);
   };
-  constructor(props) {
-    super(props);
-  }
+  aClickHandler = (e) => {
+    e.preventDefault();
+    console.log(e.currentTarget.tagName);
+  };
   render() {
-    const { users } = this.state;
-    const usersList = users.map((name, index) => {
-      return (
-        <li key={index} onClick={this.clickHandler}>
-          {name}
-        </li>
-      );
-    });
-    return <ul>{usersList}</ul>;
-  }
-
-  clickHandler = (e) => {
-    const { innerText: userName } = e.target;
-    this.removeUser(userName);
-  };
-
-  addUser(name) {
-    this.setState({ users: [...this.state.users, name] });
-  }
-
-  removeUser(name) {
-    const currUsers = this.state.users.filter((user) => user != name);
-    this.setState({ users: currUsers });
+    return (
+      <div onClick={this.divClickHandler}>
+        <a href="https://devmentor.pl" onClick={this.aClickHandler}>
+          Link!
+        </a>
+        Text
+      </div>
+    );
   }
 }
 
