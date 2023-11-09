@@ -113,13 +113,12 @@ const root = createRoot(document.querySelector('#root'));
 // }
 
 class App extends React.Component {
+  state = {
+    searchQuery: '',
+    users: ['Jan Kowalski', 'Michał Nowak'],
+  };
   constructor(props) {
     super(props);
-    this.state = {
-      searchQuery: '',
-      users: ['Jan Kowalski', 'Michał Nowak'],
-    };
-    this.clickHandler = this.clickHandler.bind(this);
   }
   render() {
     const { users } = this.state;
@@ -133,9 +132,9 @@ class App extends React.Component {
     return <ul>{usersList}</ul>;
   }
 
-  clickHandler() {
-    console.log('Click!', this);
-  }
+  clickHandler = (event) => {
+    console.log(event.target.innerText);
+  };
 
   addUser(name) {
     this.setState({ users: [...this.state.users, name] });
