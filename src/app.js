@@ -162,24 +162,176 @@ const root = createRoot(document.querySelector('#root'));
 //   }
 // }
 
+// class App extends React.Component {
+//   divClickHandler = (e) => {
+//     console.log(e.currentTarget.tagName);
+//   };
+//   aClickHandler = (e) => {
+//     e.preventDefault();
+//     console.log(e.currentTarget.tagName);
+//   };
+//   render() {
+//     return (
+//       <div onClick={this.divClickHandler}>
+//         <a href="https://devmentor.pl" onClick={this.aClickHandler}>
+//           Link!
+//         </a>
+//         Text
+//       </div>
+//     );
+//   }
+// }
+
+// class App extends React.Component {
+//   state = {
+//     firstName: '',
+//     lastName: '',
+//     searchQuery: '',
+//     users: ['Jan Kowalski', 'Michał Nowak'],
+//   };
+//   renderUsersList() {
+//     const { users } = this.state;
+//     return users.map((name, index) => {
+//       return (
+//         <li key={index} onClick={this.clickHandler}>
+//           {name}
+//         </li>
+//       );
+//     });
+//   }
+
+//   render() {
+//     const { firstName, lastName } = this.state;
+//     return (
+//       <section>
+//         <form>
+//           <input
+//             name="firstName"
+//             value={firstName}
+//             onChange={this.inputChange}
+//           />
+//           <input name="lastName" value={lastName} onChange={this.inputChange} />
+//           <input type="submit" />
+//         </form>
+//         <ul>{this.renderUsersList()}</ul>
+//       </section>
+//     );
+//   }
+
+//   submitHandler = (e) => {
+//     e.preventDefault();
+//     const { firstName, lastName } = this.state;
+//     if (firstName && lastName) {
+//       this.addUser(`${firstName} ${lastName}`);
+//       this.setState({ firstName: '', lastName: '' });
+//     } else {
+//       // komunikat
+//     }
+//   };
+
+//   addUser(name) {
+//     this.setState({
+//       users: [...this.state.users, name],
+//     });
+//   }
+
+//   inputChange = (e) => {
+//     const { name, value } = e.target;
+//     this.setState({ [name]: value });
+//   };
+
+// firstNameChange = (e) => {
+//   this.setState({ firstName: e.target.value });
+// };
+
+// lastNameChange = (e) => {
+//   this.setState({ lastName: e.target.value });
+// };
+// }
+
 class App extends React.Component {
-  divClickHandler = (e) => {
-    console.log(e.currentTarget.tagName);
+  state = {
+    firstName: '',
+    lastName: '',
+    searchQuery: '',
+    users: ['Jan Kowalski', 'Michał Nowak'],
   };
-  aClickHandler = (e) => {
-    e.preventDefault();
-    console.log(e.currentTarget.tagName);
+
+  renderUsersList() {
+    const { users } = this.state;
+    return users.map((name, index) => {
+      return (
+        <li key={index} onClick={this.clickHandler}>
+          {name}
+        </li>
+      );
+    });
+  }
+
+  clickHandler = (e) => {
+    const { innerText: userName } = e.target;
+    this.removeUser(userName);
   };
+
+  inputChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
   render() {
+    const { select, textarea } = this.state;
     return (
-      <div onClick={this.divClickHandler}>
-        <a href="https://devmentor.pl" onClick={this.aClickHandler}>
-          Link!
-        </a>
-        Text
-      </div>
+      <form>
+        <p>
+          <select value={select} onChange={this.changeHandler}>
+            <option value="1">jeden</option>
+            <option>dwa</option>
+          </select>
+        </p>
+        <p>
+          <textarea value={textarea} onChange={this.changeHandler} />
+        </p>
+      </form>
     );
   }
+
+  changeHandler = (e) => {
+    const { tagName, value } = e.target;
+    this.setState({ [tagName.toLowerCase()]: value });
+  };
+
+  submitHandler = (e) => {
+    e.preventDefault();
+
+    const { firstName, lastName } = this.state;
+    if (firstName && lastName) {
+      this.addUser(`${firstName} ${lastName}`);
+      this.setState({
+        firstName: '',
+        lastName: '',
+      });
+    } else {
+      // tutaj komunikat dla użytkownika
+    }
+  };
+
+  addUser(name) {
+    this.setState({
+      users: [...this.state.users, name],
+    });
+  }
+
+  removeUser(name) {
+    const currUsers = this.state.users.filter((user) => user != name);
+
+    this.setState({
+      users: currUsers,
+    });
+  }
 }
+
+root.render(<App />);
 
 root.render(<App />);
