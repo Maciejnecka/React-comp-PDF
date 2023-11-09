@@ -119,13 +119,22 @@ class App extends React.Component {
       searchQuery: '',
       users: ['Jan Kowalski', 'Michał Nowak'],
     };
+    this.clickHandler = this.clickHandler.bind(this);
   }
   render() {
     const { users } = this.state;
-    const usersJSX = users.map((name) => {
-      return <li>{name}</li>;
+    const usersList = users.map((name, index) => {
+      return (
+        <li key={index} onClick={this.clickHandler}>
+          {name}
+        </li>
+      );
     });
-    return <ul>{usersJSX}</ul>;
+    return <ul>{usersList}</ul>;
+  }
+
+  clickHandler() {
+    console.log('Click!', this);
   }
 
   addUser(name) {
