@@ -37,27 +37,63 @@ const root = createRoot(document.querySelector('#root'));
 //   }
 // }
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      counter: 0,
-    };
-  }
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       counter: 0,
+//     };
+//   }
 
-  render() {
-    return <h1>{this.state.counter}</h1>;
-  }
+//   render() {
+//     return <h1>{this.state.counter}</h1>;
+//   }
 
-  componentDidMount() {
-    this.id = setInterval(() => {
-      const { counter } = this.state;
-      this.setState({ counter: counter + 1 });
-    }, 1000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.id);
-  }
-}
+//   componentDidMount() {
+//     this.id = setInterval(() => {
+//       const { counter } = this.state;
+//       this.setState({ counter: counter + 1 });
+//     }, 1000);
+//   }
+//   componentWillUnmount() {
+//     clearInterval(this.id);
+//   }
+// }
+
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { counter: 0 };
+//   }
+//   render() {
+//     return <h1>{this.state.counter}</h1>;
+//   }
+//   componentDidMount() {
+//     this.id = setInterval(
+//       () => this.setState({ counter: this.state.counter + 1 }),
+//       1000
+//     );
+//   }
+// }
+
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { counter: 0 };
+//   }
+//   render() {
+//     return <h1>{this.state.counter}</h1>;
+//   }
+//   componentDidMount() {
+//     const newState = (state, props) => {
+//       const { counter } = state;
+//       const { step } = props;
+//       return {
+//         counter: counter + step,
+//       };
+//     };
+//     this.setState(newState);
+//   }
+// }
 
 root.render(<App />);
